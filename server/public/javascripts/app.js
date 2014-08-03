@@ -18,6 +18,7 @@ $(function() {
   // });
   var myFirebaseRef = new Firebase("https://flickering-fire-9434.firebaseio.com/");
 
+  // Soundcloud
   if (document.location.hash === "#1") {
     console.log("in 1");
     myFirebaseRef.on('child_changed', function (snapshot) {
@@ -75,6 +76,7 @@ $(function() {
     // }
   }
 
+  // Youtube
   if (document.location.hash === "#2") {
     $('body').append('<iframe width="1280" height="720" src="//www.youtube.com/embed/IHVPn8VDXQA?rel=0" frameborder="0" allowfullscreen></iframe>');
     console.log("in 2");
@@ -92,6 +94,7 @@ $(function() {
     });
   }
 
+  // Google Maps
   if (document.location.hash === "#3") {
     console.log("in 3");
     myFirebaseRef.on('child_changed', function (snapshot) {
