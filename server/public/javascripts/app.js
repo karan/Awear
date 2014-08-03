@@ -139,9 +139,9 @@ function onPlayerReady(event) {
         console.log("in else if");
         player.stopVideo();
       } else if (player && newPost.Gesture === 'wavein') {
-        playlist.previousVideo();
+        player.previousVideo();
       } else if (player && newPost.Gesture === 'waveout') {
-        playlist.nextVideo();
+        player.nextVideo();
       }
 
     } else {
