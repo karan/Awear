@@ -1,2 +1,3 @@
-yc-hacks
-========
+# Awear
+
+Built at YC Hacks '14
