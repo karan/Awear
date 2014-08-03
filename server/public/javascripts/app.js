@@ -49,6 +49,40 @@ $(function() {
     $('.page.soundcloud').hide();
     $('.page.maps').show();
 
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+
+    function initialize() {
+      directionsDisplay = new google.maps.DirectionsRenderer();
+
+      navigator.geolocation.getCurrentPosition(function (loc) {
+        var myLocation = new google.maps.LatLng(loc.coords.latitude, loc.coords.longitude);
+        var mapOptions = {
+          zoom: 15,
+          center: myLocation
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        directionsDisplay.setMap(map);
+        showRoute(myLocation, 'box, san francisco');
+      });
+    }
+
+    function showRoute(start, end) {
+      var request = {
+        origin:start,
+        destination:end,
+        travelMode: google.maps.TravelMode.DRIVING
+      };
+      directionsService.route(request, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+        }
+      });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
     myFirebaseRef.on('child_changed', function (snapshot) {
       var newPost = snapshot.val();
       console.log(newPost);
@@ -60,41 +94,8 @@ $(function() {
         $('body').css('background', 'red');
         $('#title').text('');
       }
-
-      var directionsDisplay;
-      var directionsService = new google.maps.DirectionsService();
-      var map;
-
-      function initialize() {
-        directionsDisplay = new google.maps.DirectionsRenderer();
-        var chicago = new google.maps.LatLng(41.850033, -87.6500523);
-        var mapOptions = {
-          zoom:7,
-          center: chicago
-        };
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        directionsDisplay.setMap(map);
-      }
-
-      function calcRoute() {
-        var start = document.getElementById('start').value;
-        var end = document.getElementById('end').value;
-        var request = {
-            origin:start,
-            destination:end,
-            travelMode: google.maps.TravelMode.DRIVING
-        };
-        directionsService.route(request, function(response, status) {
-          if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-          }
-        });
-      }
-
-      google.maps.event.addDomListener(window, 'load', initialize);
     });
-  }
-  
+  }  
 });
 
 
