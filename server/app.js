@@ -53,7 +53,12 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('connected', function(uuid) {
     socket.join(uuid);
+    active_zone = uuid;
     io.sockets.emit('someoneConnected', uuid);
+  });
+
+  socket.on('gesture', function(gesture) {
+    io.sockets.emit(gesture, active_zone);
   });
 
   console.log("client connected");

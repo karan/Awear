@@ -13,8 +13,9 @@ $(function() {
     }
   });
 
-  socket.on('gesture', function (gesture) {
+  socket.on('gesture', function (gesture, uuid) {
     console.log(gesture);
   });
 
 });
+
