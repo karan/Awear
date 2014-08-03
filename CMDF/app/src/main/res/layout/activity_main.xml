@@ -9,4 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <WebView
+        android:id="@+id/wvMain"
+        android:layout_below="@id/tvMain"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 </RelativeLayout>
