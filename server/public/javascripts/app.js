@@ -62,6 +62,13 @@ $(function() {
       );
     });
 
+    // setTimeout(function () {
+    //   console.log('start');
+    //   getSpeech(function (result) {
+    //     zoomToQuery(result);
+    //   });
+    // }, 4000);
+
     // Zooms the map to a location in the query (like 'New York')
     function zoomToQuery(query) {
       $.getJSON('http://maps.google.com/maps/api/geocode/json?address=' + query.replace(' ', '+'), function (data) {
@@ -125,7 +132,7 @@ $(function() {
         }
       }
     });
-  }  
+  }
 });
 
 
@@ -187,4 +194,31 @@ function onPlayerReady(event) {
 // Soundcloud Handlers //
 /////////////////////////
 
+/////////////////////////
+// Google Map Handlers //
+/////////////////////////
 
+function getSpeech(cb) {
+  var recognition = new webkitSpeechRecognition();
+  var interim_transcript = '';
+  var final_transcript = '';
+  recognition.start();
+  recognition.continuous = false;
+  recognition.interimResults = true;
+  recognition.onstart = function() {  };
+  recognition.onresult = function(event) {
+    var interim_transcript = '';
+
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+        final_transcript += event.results[i][0].transcript;
+      } else {
+        interim_transcript += event.results[i][0].transcript;
+      }
+    }
+    cb(final_transcript);
+  };
+  recognition.onend = function() {
+    cb(final_transcript);
+  };
+}
