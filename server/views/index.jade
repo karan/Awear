@@ -13,9 +13,12 @@ html(lang="en")
     script(src="//w.soundcloud.com/player/api.js")
     script(src="//cdn.socket.io/socket.io-1.0.6.js")
     script(src="//maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyA3hYYwgFRo135DXqVBZ_7Z8KzFnvv7cY4")
+    script(src="https://cdn.firebase.com/js/client/1.0.18/firebase.js")
 
     script(src='/javascripts/utils.js')
     script(src='/javascripts/app.js')
 
   body
-    
+    h1#title REST
+    #player
+        a(href='http://www.youtube.com/embed/WAZ5SmJd1To', class='youtube iframe') video

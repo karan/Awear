@@ -10,7 +10,6 @@ var path = require('path');
 
 var app = express();
 
-
 // all environments
 app.set('port', process.env.PORT || 3001);
 app.set('views', path.join(__dirname, 'views'));
@@ -29,17 +28,26 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-
 app.get('/', routes.index);
 
 var active_zone;
+// var globalCurrent = null;
+// var globalAction = null;
 
 // Used by mobile app to tell which zone to connect to
 app.get('/connect', function(req, res) {
   var uuid = req.query.uuid;
-  active_zone = uuid;
   console.log(uuid);
+  // globalCurrent = 1;
+  // globalAction = "yes";
 });
+
+// app.get('/listen1', function(req, res) {
+//   if(globalCurrent !== null) {
+//       console.log("test");
+//       return "green";
+//   }
+// });
 
 app.get('/gesture', function(req, res) {
   var gesture = req.query.gesture;
@@ -47,11 +55,12 @@ app.get('/gesture', function(req, res) {
 });
 
 var server = http.createServer(app);
-var io = require('socket.io')(server);
+var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function (socket) {
 
   socket.on('connected', function(uuid) {
+    console.log('uuid ' + uuid);
     socket.join(uuid);
     active_zone = uuid;
     io.sockets.emit('someoneConnected', uuid);
