@@ -6,7 +6,7 @@ $(function() {
   var widgetIframe = document.getElementById('sc-player'),
       widget = SC.Widget(widgetIframe);
 
-  $('body').css('background', 'yellow');
+  $('body').css('background', '#FFDC00');
 
   // Soundcloud
   if (document.location.hash === "#1") {
@@ -18,7 +18,7 @@ $(function() {
       var newPost = snapshot.val();
       console.log(newPost);
       if (newPost.UUID === "50522") {
-        $('body').css('background', 'green');
+        $('body').css('background', '#2ECC40');
         $('#title').text(newPost.Gesture);
         widget.bind(SC.Widget.Events.READY, function() {
           if (newPost.Gesture === 'spread') {
@@ -28,7 +28,7 @@ $(function() {
           }
         });
       } else {
-        $('body').css('background', 'red');
+        $('body').css('background', '#FFDC00');
         $('#title').text('');
       }
     });
@@ -88,10 +88,10 @@ $(function() {
       console.log(newPost);
       $('#title').text(newPost.Gesture);
       if (newPost.UUID === "28665") {
-        $('body').css('background', 'green');
+        $('body').css('background', '#2ECC40');
         $('#title').text(newPost.Gesture);
       } else {
-        $('body').css('background', 'red');
+        $('body').css('background', '#FFDC00');
         $('#title').text('');
       }
     });
@@ -134,7 +134,7 @@ function onPlayerReady(event) {
     $('#title').text(newPost.Gesture);
 
     if (newPost.UUID === "47826") {
-      $('body').css('background', 'green');
+      $('body').css('background', '#2ECC40');
       $('#title').text(newPost.Gesture);
 
       if (player && newPost.Gesture === 'spread') {
@@ -150,7 +150,7 @@ function onPlayerReady(event) {
       }
 
     } else {
-      $('body').css('background', 'red');
+      $('body').css('background', '#FFDC00');
       $('#title').text('');
     }
   });
