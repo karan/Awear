@@ -19,7 +19,6 @@ $(function() {
       console.log(newPost);
       if (newPost.UUID === "50522") {
         $('body').css('background', '#2ECC40');
-        $('#title').text(newPost.Gesture);
         widget.bind(SC.Widget.Events.READY, function() {
           if (newPost.Gesture === 'spread') {
             widget.play();
@@ -29,7 +28,6 @@ $(function() {
         });
       } else {
         $('body').css('background', '#FFDC00');
-        $('#title').text('');
       }
     });
   }
@@ -86,13 +84,10 @@ $(function() {
     myFirebaseRef.on('child_changed', function (snapshot) {
       var newPost = snapshot.val();
       console.log(newPost);
-      $('#title').text(newPost.Gesture);
       if (newPost.UUID === "28665") {
         $('body').css('background', '#2ECC40');
-        $('#title').text(newPost.Gesture);
       } else {
         $('body').css('background', '#FFDC00');
-        $('#title').text('');
       }
     });
   }  
@@ -114,8 +109,8 @@ function loadYoutubeVideo() {
 function onYouTubeIframeAPIReady() {
   console.log("api ready");
   player = new YT.Player('yt-player', {
-    height: '390',
-    width: '640',
+    height: '100%',
+    width: '100%',
     playerVars: {
       listType:'playlist',
       list: 'PLl4T6p7km9dbQojQLEz4N7nUPf8ER9rwr'
@@ -131,11 +126,9 @@ function onPlayerReady(event) {
   myFirebaseRef.on('child_changed', function (snapshot) {
     var newPost = snapshot.val();
     console.log(newPost);
-    $('#title').text(newPost.Gesture);
 
     if (newPost.UUID === "47826") {
       $('body').css('background', '#2ECC40');
-      $('#title').text(newPost.Gesture);
 
       if (player && newPost.Gesture === 'spread') {
         console.log("in if");
@@ -151,7 +144,6 @@ function onPlayerReady(event) {
 
     } else {
       $('body').css('background', '#FFDC00');
-      $('#title').text('');
     }
   });
 }
