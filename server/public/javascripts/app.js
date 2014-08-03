@@ -1,4 +1,6 @@
 var myFirebaseRef = new Firebase("https://flickering-fire-9434.firebaseio.com/");
+var yellow = '#FFDC00';
+var green = '#2ECC40';
 
 $(function() {
 
@@ -6,7 +8,7 @@ $(function() {
   var widgetIframe = document.getElementById('sc-player'),
       widget = SC.Widget(widgetIframe);
 
-  $('body').css('background', '#FFDC00');
+  $('body').css('background', yellow);
 
   // Soundcloud
   if (document.location.hash === "#1") {
@@ -18,7 +20,7 @@ $(function() {
       var newPost = snapshot.val();
       console.log(newPost);
       if (newPost.UUID === "50522") {
-        $('body').css('background', '#2ECC40');
+        $('body').css('background', green);
         widget.bind(SC.Widget.Events.READY, function() {
           if (newPost.Gesture === 'spread') {
             widget.play();
@@ -27,7 +29,7 @@ $(function() {
           }
         });
       } else {
-        $('body').css('background', '#FFDC00');
+        $('body').css('background', yellow);
       }
     });
   }
@@ -85,9 +87,9 @@ $(function() {
       var newPost = snapshot.val();
       console.log(newPost);
       if (newPost.UUID === "28665") {
-        $('body').css('background', '#2ECC40');
+        $('body').css('background', green);
       } else {
-        $('body').css('background', '#FFDC00');
+        $('body').css('background', yellow);
       }
     });
   }  
@@ -128,7 +130,7 @@ function onPlayerReady(event) {
     console.log(newPost);
 
     if (newPost.UUID === "47826") {
-      $('body').css('background', '#2ECC40');
+      $('body').css('background', green);
 
       if (player && newPost.Gesture === 'spread') {
         console.log("in if");
@@ -143,7 +145,7 @@ function onPlayerReady(event) {
       }
 
     } else {
-      $('body').css('background', '#FFDC00');
+      $('body').css('background', yellow);
     }
   });
 }
