@@ -1,17 +1,19 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tvMain"
+    <Button
+        android:id="@+id/bCapture"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Capture" />
 
-    <WebView
-        android:id="@+id/wvMain"
-        android:layout_below="@id/tvMain"
+    <ImageView
+        android:id="@+id/ivCaptured"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
-</RelativeLayout>
+</LinearLayout>

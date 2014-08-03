@@ -16,6 +16,14 @@ a {
   /*padding: 50px;*/
 }
 
+.phone {
+  width: 900px;
+  height: 100%;
+  margin: auto;
+  background-image: url('/images/iphone.png');
+  background-size: auto 100%;
+}
+
 #map-canvas {
   height: 100%;
 }
