@@ -4,11 +4,11 @@ html(lang="en")
     title= Singular
     meta(charset="utf-8")
 
-    // Stylesheets
+    //- Stylesheets
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/reset.css')
 
-    // Scripts
+    //- Scripts
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="//connect.soundcloud.com/sdk.js")
     script(src="//w.soundcloud.com/player/api.js")
@@ -19,9 +19,13 @@ html(lang="en")
     script(src='/javascripts/utils.js')
     script(src='/javascripts/app.js')
 
+    //- Maps
+    script(src='https://maps.googleapis.com/maps/api/js?v=3.exp')
+
   body
     .page.soundcloud
       h1#title
       #player
     .page.youtube
     .page.maps
+      #map-canvas
