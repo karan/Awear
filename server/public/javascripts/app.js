@@ -62,12 +62,13 @@ $(function() {
       );
     });
 
-    // setTimeout(function () {
-    //   console.log('start');
+    // setInterval(function () {
     //   getSpeech(function (result) {
-    //     zoomToQuery(result);
+    //     if (result) {
+    //       zoomToQuery(result);
+    //     }
     //   });
-    // }, 4000);
+    // }, 5000);
 
     // Zooms the map to a location in the query (like 'New York')
     function zoomToQuery(query) {
@@ -197,7 +198,6 @@ function onPlayerReady(event) {
 /////////////////////////
 // Google Map Handlers //
 /////////////////////////
-
 function getSpeech(cb) {
   var recognition = new webkitSpeechRecognition();
   var interim_transcript = '';
