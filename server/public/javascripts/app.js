@@ -42,8 +42,8 @@ $(function() {
     loadYoutubeVideo();
   }
 
+  // Google Maps
   if (document.location.hash === "#3") {
-    // Google Maps
     console.log("in 3");
     $('.page.youtube').hide();
     $('.page.soundcloud').hide();
@@ -115,7 +115,10 @@ function onYouTubeIframeAPIReady() {
   player = new YT.Player('yt-player', {
     height: '390',
     width: '640',
-    videoId: 'IHVPn8VDXQA',
+    playerVars: {
+      listType:'playlist',
+      list: 'PLl4T6p7km9dbQojQLEz4N7nUPf8ER9rwr'
+    },
     events: {
       'onReady': onPlayerReady
     }
@@ -128,15 +131,21 @@ function onPlayerReady(event) {
     var newPost = snapshot.val();
     console.log(newPost);
     $('#title').text(newPost.Gesture);
+
     if (newPost.UUID === "47826") {
       $('body').css('background', 'green');
       $('#title').text(newPost.Gesture);
+
       if (player && newPost.Gesture === 'spread') {
         console.log("in if");
         player.playVideo();
       } else if (player && newPost.Gesture === 'fist') {
         console.log("in else if");
         player.stopVideo();
+      } else if (player && newPost.Gesture === 'wavein') {
+        playlist.previousVideo();
+      } else if (player && newPost.Gesture === 'waveout') {
+        playlist.nextVideo();
       }
 
     } else {
