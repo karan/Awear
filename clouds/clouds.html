@@ -36,7 +36,7 @@ var clouds = [];
 canvas.width = width;
 canvas.height = height;
 
-addCloud();
+window.setInterval(function() {addCloud();}, 500);
 
 function update() {
 	// Draw sky
@@ -48,35 +48,17 @@ function update() {
 	requestAnimationFrame(update);
 }
 
-function initCloud() {
-	cloud = {
-		color : getRandomColor(),
-		x : getRandomWidth(),
-		y : getRandomHeight(),
-		width : cloudSize,
-		height : cloudSize
-	};
-}
-
-function updateCloud() {
-	cloudSize += growthSpeed;
-	cloudOpacity += 0.004;
-	cloud.color = getRandomColor();
-	cloud.x -= growthSpeed / 2;
-	cloud.y -= growthSpeed / 2 - offsetY;
-	cloud.width = cloudSize;
-	cloud.height = cloudSize / 2;
-}
-
 function addCloud() {
+	var initCloudSize = 200;
 	clouds.push({
 		color : getRandomColor(),
 		x : getRandomWidth(),
 		y : getRandomHeight(),
-		width : cloudSize,
-		height : cloudSize,
-		cloudSize : 20,
-		cloudOpacity : 0
+		cloudSize : initCloudSize,
+		width : initCloudSize,
+		height : initCloudSize,
+		cloudOpacity : 0,
+		cloudDestroy : false
 	});
 }
 
@@ -91,22 +73,30 @@ function updateClouds() {
 
 function updateCloud(cloud) {
 	cloud.cloudSize += growthSpeed;
-	cloud.cloudOpacity += 0.004;
-	cloud.color = getRandomColor();
+	if (cloud.cloudOpacity > 1)
+		cloud.cloudDestroy = true;
+	if (cloud.cloudDestroy) {
+		if (cloud.cloudOpacity < 0)
+			return;
+		cloud.cloudOpacity -= 0.016;
+	} else
+		cloud.cloudOpacity += 0.004;
+	cloud.color = getRandomColor(cloud.cloudOpacity);
 	cloud.x -= growthSpeed / 2;
 	cloud.y -= growthSpeed / 2 - offsetY;
-	cloud.width = cloudSize;
-	cloud.height = cloudSize / 2;
+	cloud.width = cloud.cloudSize;
+	cloud.height = cloud.cloudSize / 2;
 }
 
-function getRandomColor() {
+function getRandomColor(opacity) {
 	var letters = '0123456789ABCDEF'.split('');
 	var color = '#';
 	for (var i = 0; i < 6; i++) {
 		color += letters[Math.round(Math.random() * 15)];
 	}
 	//return color;
-	return "rgba(255, 255, 255, " + cloudOpacity + ")";
+	return "rgba(255, 255, 255, " + opacity + ")";
+	//return "rgba(" + Math.round(Math.random() * 255) + ", " + Math.round(Math.random() * 255) + ", " + Math.round(Math.random() * 255) + ", " + opacity + ")";
 }
 
 function getRandomWidth() {
@@ -114,6 +104,7 @@ function getRandomWidth() {
 }
 
 function getRandomHeight() {
+	return height / 2;
 	return height / 2 + Math.round(Math.random() * height / 10);
 }
 
