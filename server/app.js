@@ -31,23 +31,12 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 
 var active_zone;
-// var globalCurrent = null;
-// var globalAction = null;
 
 // Used by mobile app to tell which zone to connect to
 app.get('/connect', function(req, res) {
   var uuid = req.query.uuid;
   console.log(uuid);
-  // globalCurrent = 1;
-  // globalAction = "yes";
 });
-
-// app.get('/listen1', function(req, res) {
-//   if(globalCurrent !== null) {
-//       console.log("test");
-//       return "green";
-//   }
-// });
 
 app.get('/gesture', function(req, res) {
   var gesture = req.query.gesture;
