@@ -52,22 +52,50 @@ $(function() {
     var directionsDisplay;
     var directionsService = new google.maps.DirectionsService();
     var map;
+    var startLocation;
+    var endLocation;
 
+    $.getJSON('http://maps.google.com/maps/api/geocode/json?address=' + 'box san francisco'.replace(' ', '+'), function (data) {
+      endLocation = new google.maps.LatLng(
+        data.results[0].geometry.location.lat,
+        data.results[0].geometry.location.lng
+      );
+    });
+
+    // Zooms the map to a location in the query (like 'New York')
+    function zoomToQuery(query) {
+      $.getJSON('http://maps.google.com/maps/api/geocode/json?address=' + query.replace(' ', '+'), function (data) {
+        endLocation = new google.maps.LatLng(
+          data.results[0].geometry.location.lat,
+          data.results[0].geometry.location.lng
+        );
+        zoomToLocation(endLocation);
+      });
+    }
+
+    // Zooms the map to a location
+    // Location is a google.maps.LatLng
+    function zoomToLocation(location) {
+      var mapOptions = {
+        zoom: 15,
+        center: location
+      };
+      map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      directionsDisplay.setMap(map);
+    }
+
+    // Creates the google map on load
     function initialize() {
       directionsDisplay = new google.maps.DirectionsRenderer();
 
       navigator.geolocation.getCurrentPosition(function (loc) {
-        var myLocation = new google.maps.LatLng(loc.coords.latitude, loc.coords.longitude);
-        var mapOptions = {
-          zoom: 15,
-          center: myLocation
-        };
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        directionsDisplay.setMap(map);
-        showRoute(myLocation, 'box, san francisco');
+        startLocation = new google.maps.LatLng(loc.coords.latitude, loc.coords.longitude);
+        zoomToLocation(startLocation);
       });
     }
 
+    // Show the route from start to end
+    // start and end can either be a query or a google.maps.LatLng
     function showRoute(start, end) {
       var request = {
         origin:start,
@@ -87,9 +115,14 @@ $(function() {
       var newPost = snapshot.val();
       console.log(newPost);
       if (newPost.UUID === "28665") {
-        $('body').css('background', green);
-      } else {
-        $('body').css('background', yellow);
+        // We are connected
+        if (startLocation) {
+          if (newPost.Gesture === 'fist') {
+            zoomToLocation(endLocation);
+          } else if (newPost.Gesture === 'spread') {
+            showRoute(startLocation, endLocation);
+          }
+        }
       }
     });
   }  
