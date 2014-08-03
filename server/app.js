@@ -38,6 +38,7 @@ var active_zone;
 app.get('/connect', function(req, res) {
   var uuid = req.query.uuid;
   active_zone = uuid;
+  console.log(uuid);
 });
 
 app.get('/gesture', function(req, res) {

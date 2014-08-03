@@ -13,4 +13,8 @@ $(function() {
     }
   });
 
+  socket.on('gesture', function (gesture) {
+    console.log(gesture);
+  });
+
 });
