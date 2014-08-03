@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Clouds</title>
+	<style type="text/css">
+		#canvas {
+			border: 1px solid #000;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+
+// requestAnimationFrame() shim
+(function() {
+	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestANimationFrame || window.msRequestANimationFrame;
+	window.requestAnimationFrame = requestAnimationFrame;
+})();
+
+// Initializing variables
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var width = window.innerWidth;
+var height = window.innerHeight;
+var offsetY = 1;
+var growthSpeed = 1;
+var clouds = [];
+
+canvas.width = width;
+canvas.height = height;
+
+addCloud();
+
+function update() {
+	// Draw sky
+	ctx.fillStyle = "#66ccff";
+	ctx.fillRect(0, 0, width, height);
+
+	updateClouds();
+
+	requestAnimationFrame(update);
+}
+
+function initCloud() {
+	cloud = {
+		color : getRandomColor(),
+		x : getRandomWidth(),
+		y : getRandomHeight(),
+		width : cloudSize,
+		height : cloudSize
+	};
+}
+
+function updateCloud() {
+	cloudSize += growthSpeed;
+	cloudOpacity += 0.004;
+	cloud.color = getRandomColor();
+	cloud.x -= growthSpeed / 2;
+	cloud.y -= growthSpeed / 2 - offsetY;
+	cloud.width = cloudSize;
+	cloud.height = cloudSize / 2;
+}
+
+function addCloud() {
+	clouds.push({
+		color : getRandomColor(),
+		x : getRandomWidth(),
+		y : getRandomHeight(),
+		width : cloudSize,
+		height : cloudSize,
+		cloudSize : 20,
+		cloudOpacity : 0
+	});
+}
+
+function updateClouds() {
+	for (var i = 0; i < clouds.length; i++) {
+		var cloud = clouds[i];
+		ctx.fillStyle = cloud.color;
+		ctx.fillRect(cloud.x, cloud.y, cloud.width, cloud.height);
+		updateCloud(cloud);
+	}
+}
+
+function updateCloud(cloud) {
+	cloud.cloudSize += growthSpeed;
+	cloud.cloudOpacity += 0.004;
+	cloud.color = getRandomColor();
+	cloud.x -= growthSpeed / 2;
+	cloud.y -= growthSpeed / 2 - offsetY;
+	cloud.width = cloudSize;
+	cloud.height = cloudSize / 2;
+}
+
+function getRandomColor() {
+	var letters = '0123456789ABCDEF'.split('');
+	var color = '#';
+	for (var i = 0; i < 6; i++) {
+		color += letters[Math.round(Math.random() * 15)];
+	}
+	//return color;
+	return "rgba(255, 255, 255, " + cloudOpacity + ")";
+}
+
+function getRandomWidth() {
+	return Math.round(Math.random() * width);
+}
+
+function getRandomHeight() {
+	return height / 2 + Math.round(Math.random() * height / 10);
+}
+
+window.addEventListener("load", function() {
+	update();
+});
+
+</script>
+</body>
+</html>
