@@ -4,10 +4,12 @@ html(lang="en")
     title= Singular
     meta(charset="utf-8")
 
-    // Stylesheets
+    //- Stylesheets
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/reset.css')
+    link(rel='stylesheet', href='/stylesheets/phone.css')
 
-    // Scripts
+    //- Scripts
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="//connect.soundcloud.com/sdk.js")
     script(src="//w.soundcloud.com/player/api.js")
@@ -19,6 +21,14 @@ html(lang="en")
     script(src='/javascripts/app.js')
 
   body
-    h1#title REST
-    #player
-        a(href='http://www.youtube.com/embed/WAZ5SmJd1To', class='youtube iframe') video
+    .page.soundcloud
+      iframe#sc-player(width="100%", height="100%", scrolling="no", frameborder="no", src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/147310720&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=true")
+    .page.youtube
+      #yt-player
+    .page.maps
+      #device.iphone
+        #devicetop.iphone-speaker
+        #screen.iphone-screen
+          #map-canvas
+        #button
+          #button-square

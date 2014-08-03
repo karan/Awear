@@ -1,8 +1,29 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.page {
+  display: none;
+  height: 100%;
+  width: 100%;
+}
+
+.page.soundcloud {
+  /*padding: 50px;*/
+}
+
+.phone {
+  width: 900px;
+  height: 100%;
+  margin: auto;
+  background-image: url('/images/iphone.png');
+  background-size: auto 100%;
+}
+
+#map-canvas {
+  height: 100%;
 }

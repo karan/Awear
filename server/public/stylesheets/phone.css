@@ -1,0 +1,87 @@
+#device, #devicetop, #screen {
+  -webkit-transition: all .4s;
+  -moz-transition: all .4s;
+  transition: all .4s;
+}
+
+#devices {
+  background-color: #73c9ad;
+  width:100%;
+  height:100%;
+  padding: 2em 0 12em;
+  margin: 0;
+}
+
+#device {
+  margin: 2em auto 0.598em;
+  background-color: #f9faf4;
+  border: 0.126em solid #fff;
+  border-radius: 1.512em;
+  width: 22.592em;
+  height: 43.058em;
+  padding:2.01em 0 0;
+  box-shadow: 0px 5px 0px #c5c3ba;
+}
+
+#device.ipad {
+  margin: 1em auto 0.598em;
+  border-radius: 1.512em;
+  width: 28.98em;
+  height: 38.178em;
+  padding:1.134em 0 0;
+  box-shadow: none;
+}
+
+#devicetop {
+  background-color: #aba99f;
+  width: 3.7em;
+  height: 0.615em;
+  border:0.246em solid #c5c3ba;
+  border-radius: 0.615em;
+  margin: 0 auto 1.456em;
+}
+
+#devicetop.ipad-camera {
+  width: 0.315em;
+  height: 0.315em;
+  border-radius: 0.315em;
+  margin: 0 auto 1.512em;
+  border: 0.189em solid #c5c3ba;
+}
+
+#screen {
+  background-color: #c5c3ba;
+  margin: 0 auto 0;
+  border: 0.189em solid #aba99f;
+  border-radius: 0.189em;
+  width:20.08em;
+  height:34.892em;
+}
+
+#screen.ipad-screen {
+  width:24.192em;
+  height:32.256em;
+}
+
+#button {
+  margin: 1.23em auto 0;
+  background-color: #c5c3ba;
+  width: 2.071em;
+  height: 2.071em;
+  border-radius: 50%;
+  padding: 0.567em;
+  cursor: hand;
+}
+
+#button:hover {
+  cursor: hand;
+}
+
+#button-square {
+  margin-left: -.26em;
+  margin-top: -.26em;
+  width: 1.33em;
+  height: 1.33em;
+  border: 0.246em solid #e9eae4;
+  border-radius: 0.5em;
+}
