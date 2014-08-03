@@ -3,11 +3,17 @@ var myFirebaseRef = new Firebase("https://flickering-fire-9434.firebaseio.com/")
 $(function() {
 
   var player;
+  var widgetIframe = document.getElementById('sc-player'),
+      widget = SC.Widget(widgetIframe);
 
   $('body').css('background', 'yellow');
 
   // Soundcloud
   if (document.location.hash === "#1") {
+    $('.page.youtube').hide();
+    $('.page.soundcloud').show();
+    $('.page.maps').hide();
+
     myFirebaseRef.on('child_changed', function (snapshot) {
       var newPost = snapshot.val();
       console.log(newPost);
@@ -18,6 +24,14 @@ $(function() {
         $('body').css('background', 'red');
         $('#title').text('');
       }
+
+      widget.bind(SC.Widget.Events.READY, function() {
+        if (newPost.Gesture === 'spread') {
+          widget.play();
+        } else if (newPost.Gesture === 'fist') {
+          widget.pause();
+        }
+      });
     });
   }
 
@@ -53,7 +67,9 @@ $(function() {
 });
 
 
-// Youtube Handlers
+//////////////////////
+// Youtube Handlers //
+//////////////////////
 function loadYoutubeVideo() {
   console.log("loading video");
   var tag = document.createElement('script');
@@ -65,7 +81,7 @@ function loadYoutubeVideo() {
 
 function onYouTubeIframeAPIReady() {
   console.log("api ready");
-  player = new YT.Player('player', {
+  player = new YT.Player('yt-player', {
     height: '390',
     width: '640',
     videoId: 'IHVPn8VDXQA',
@@ -98,3 +114,9 @@ function onPlayerReady(event) {
     }
   });
 }
+
+/////////////////////////
+// Soundcloud Handlers //
+/////////////////////////
+
+
