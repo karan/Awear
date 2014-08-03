@@ -20,18 +20,17 @@ $(function() {
       if (newPost.UUID === "50522") {
         $('body').css('background', 'green');
         $('#title').text(newPost.Gesture);
+        widget.bind(SC.Widget.Events.READY, function() {
+          if (newPost.Gesture === 'spread') {
+            widget.play();
+          } else if (newPost.Gesture === 'fist') {
+            widget.pause();
+          }
+        });
       } else {
         $('body').css('background', 'red');
         $('#title').text('');
       }
-
-      widget.bind(SC.Widget.Events.READY, function() {
-        if (newPost.Gesture === 'spread') {
-          widget.play();
-        } else if (newPost.Gesture === 'fist') {
-          widget.pause();
-        }
-      });
     });
   }
 
