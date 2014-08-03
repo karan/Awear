@@ -76,6 +76,7 @@ $(function() {
   }
 
   if (document.location.hash === "#2") {
+    $('body').append('<iframe width="1280" height="720" src="//www.youtube.com/embed/IHVPn8VDXQA?rel=0" frameborder="0" allowfullscreen></iframe>');
     console.log("in 2");
     myFirebaseRef.on('child_changed', function (snapshot) {
       var newPost = snapshot.val();
