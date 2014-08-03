@@ -134,6 +134,7 @@ $(function() {
         $('.page.youtube').addClass('hide');
         $('.page.maps').removeClass('hide');
         // We are connected
+        $('body').css('background', green);
         if (startLocation) {
           if (newPost.Gesture === 'fist') {
             zoomToLocation(endLocation);
@@ -141,6 +142,8 @@ $(function() {
             showRoute(startLocation, endLocation);
           }
         }
+      } else {
+        $('body').css('background', yellow);
       }
     });
   }
