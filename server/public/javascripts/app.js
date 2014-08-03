@@ -1,6 +1,9 @@
 var myFirebaseRef = new Firebase("https://flickering-fire-9434.firebaseio.com/");
 var yellow = '#FFDC00';
 var green = '#2ECC40';
+$('.page.soundcloud').addClass('hide');
+$('.page.youtube').addClass('hide');
+$('.page.maps').addClass('hide');
 
 $(function() {
 
@@ -20,6 +23,10 @@ $(function() {
       var newPost = snapshot.val();
       console.log(newPost);
       if (newPost.UUID === "50522") {
+        $('.page.soundcloud').removeClass('hide');
+        $('.page.youtube').addClass('hide');
+        $('.page.maps').addClass('hide');
+
         $('body').css('background', green);
         widget.bind(SC.Widget.Events.READY, function() {
           if (newPost.Gesture === 'spread') {
@@ -124,6 +131,9 @@ $(function() {
       var newPost = snapshot.val();
       console.log(newPost);
       if (newPost.UUID === "28665") {
+        $('.page.soundcloud').addClass('hide');
+        $('.page.youtube').addClass('hide');
+        $('.page.maps').removeClass('hide');
         // We are connected
         $('body').css('background', green);
         if (startLocation) {
@@ -178,6 +188,9 @@ function onPlayerReady(event) {
     console.log(newPost);
 
     if (newPost.UUID === "47826") {
+      $('.page.soundcloud').addClass('hide');
+      $('.page.youtube').removeClass('hide');
+      $('.page.maps').addClass('hide');
       $('body').css('background', green);
 
       if (player && newPost.Gesture === 'spread') {
