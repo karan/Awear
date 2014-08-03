@@ -2,7 +2,6 @@ $(function() {
 
   var socket = io.connect('http://localhost:3001');
   var Uuid = utils.randUuid();
-  socket.emit('connected', Uuid);
 
   $('body').css('background', 'yellow');
 
@@ -13,7 +12,5 @@ $(function() {
       $('body').css('background', 'yellow');
     }
   });
-
-  
 
 });

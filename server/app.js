@@ -32,6 +32,19 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 
+var active_zone;
+
+// Used by mobile app to tell which zone to connect to
+app.get('/connect', function(req, res) {
+  var uuid = req.query.uuid;
+  active_zone = uuid;
+});
+
+app.get('/gesture', function(req, res) {
+  var gesture = req.query.gesture;
+  console.log(gesture);
+});
+
 var server = http.createServer(app);
 var io = require('socket.io')(server);
 
