@@ -124,6 +124,7 @@ $(function() {
       console.log(newPost);
       if (newPost.UUID === "28665") {
         // We are connected
+        $('body').css('background', green);
         if (startLocation) {
           if (newPost.Gesture === 'fist') {
             zoomToLocation(endLocation);
@@ -131,6 +132,8 @@ $(function() {
             showRoute(startLocation, endLocation);
           }
         }
+      } else {
+        $('body').css('background', yellow);
       }
     });
   }
