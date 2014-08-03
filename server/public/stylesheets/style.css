@@ -15,3 +15,7 @@ a {
 .page.soundcloud {
   padding: 50px;
 }
+
+#map-canvas {
+  height: 100%;
+}
