@@ -97,6 +97,7 @@ $(function() {
   // Google Maps
   if (document.location.hash === "#3") {
     console.log("in 3");
+    $('.page.maps').show();
     myFirebaseRef.on('child_changed', function (snapshot) {
       var newPost = snapshot.val();
       console.log(newPost);
