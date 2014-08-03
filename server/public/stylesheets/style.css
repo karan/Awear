@@ -1,6 +1,7 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  -webkit-transition: background;
+  -webkit-transition: background-color 1s;
+  transition: background-color 1s;
 }
 
 a {

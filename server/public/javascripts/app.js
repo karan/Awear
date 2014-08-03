@@ -89,6 +89,7 @@ $(function() {
         center: location
       };
       map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      directionsDisplay = new google.maps.DirectionsRenderer();
       directionsDisplay.setMap(map);
     }
 
@@ -127,7 +128,10 @@ $(function() {
         $('body').css('background', green);
         if (startLocation) {
           if (newPost.Gesture === 'fist') {
-            zoomToLocation(endLocation);
+            directionsDisplay.setMap(null);
+            setTimeout(function () {
+              zoomToLocation(endLocation);
+            }, 1000);
           } else if (newPost.Gesture === 'spread') {
             showRoute(startLocation, endLocation);
           }
