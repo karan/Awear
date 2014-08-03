@@ -1,4 +1,6 @@
 var myFirebaseRef = new Firebase("https://flickering-fire-9434.firebaseio.com/");
+var yellow = '#FFDC00';
+var green = '#2ECC40';
 
 $(function() {
 
@@ -6,7 +8,7 @@ $(function() {
   var widgetIframe = document.getElementById('sc-player'),
       widget = SC.Widget(widgetIframe);
 
-  $('body').css('background', 'yellow');
+  $('body').css('background', yellow);
 
   // Soundcloud
   if (document.location.hash === "#1") {
@@ -18,8 +20,7 @@ $(function() {
       var newPost = snapshot.val();
       console.log(newPost);
       if (newPost.UUID === "50522") {
-        $('body').css('background', 'green');
-        $('#title').text(newPost.Gesture);
+        $('body').css('background', green);
         widget.bind(SC.Widget.Events.READY, function() {
           if (newPost.Gesture === 'spread') {
             widget.play();
@@ -28,8 +29,7 @@ $(function() {
           }
         });
       } else {
-        $('body').css('background', 'red');
-        $('#title').text('');
+        $('body').css('background', yellow);
       }
     });
   }
@@ -42,8 +42,8 @@ $(function() {
     loadYoutubeVideo();
   }
 
+  // Google Maps
   if (document.location.hash === "#3") {
-    // Google Maps
     console.log("in 3");
     $('.page.youtube').hide();
     $('.page.soundcloud').hide();
@@ -86,13 +86,10 @@ $(function() {
     myFirebaseRef.on('child_changed', function (snapshot) {
       var newPost = snapshot.val();
       console.log(newPost);
-      $('#title').text(newPost.Gesture);
       if (newPost.UUID === "28665") {
-        $('body').css('background', 'green');
-        $('#title').text(newPost.Gesture);
+        $('body').css('background', green);
       } else {
-        $('body').css('background', 'red');
-        $('#title').text('');
+        $('body').css('background', yellow);
       }
     });
   }  
@@ -114,9 +111,12 @@ function loadYoutubeVideo() {
 function onYouTubeIframeAPIReady() {
   console.log("api ready");
   player = new YT.Player('yt-player', {
-    height: '390',
-    width: '640',
-    videoId: 'IHVPn8VDXQA',
+    height: '100%',
+    width: '100%',
+    playerVars: {
+      listType:'playlist',
+      list: 'PLl4T6p7km9dbQojQLEz4N7nUPf8ER9rwr'
+    },
     events: {
       'onReady': onPlayerReady
     }
@@ -128,21 +128,24 @@ function onPlayerReady(event) {
   myFirebaseRef.on('child_changed', function (snapshot) {
     var newPost = snapshot.val();
     console.log(newPost);
-    $('#title').text(newPost.Gesture);
+
     if (newPost.UUID === "47826") {
-      $('body').css('background', 'green');
-      $('#title').text(newPost.Gesture);
+      $('body').css('background', green);
+
       if (player && newPost.Gesture === 'spread') {
         console.log("in if");
         player.playVideo();
       } else if (player && newPost.Gesture === 'fist') {
         console.log("in else if");
         player.stopVideo();
+      } else if (player && newPost.Gesture === 'wavein') {
+        playlist.previousVideo();
+      } else if (player && newPost.Gesture === 'waveout') {
+        playlist.nextVideo();
       }
 
     } else {
-      $('body').css('background', 'red');
-      $('#title').text('');
+      $('body').css('background', yellow);
     }
   });
 }
