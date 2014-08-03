@@ -23,13 +23,19 @@ $(function() {
 
   // Youtube
   if (document.location.hash === "#2") {
+    $('.page.youtube').show();
+    $('.page.soundcloud').hide();
+    $('.page.maps').hide();
     loadYoutubeVideo();
-
-    
   }
 
   if (document.location.hash === "#3") {
+    // Google Maps
     console.log("in 3");
+    $('.page.youtube').hide();
+    $('.page.soundcloud').hide();
+    $('.page.maps').show();
+
     myFirebaseRef.on('child_changed', function (snapshot) {
       var newPost = snapshot.val();
       console.log(newPost);
@@ -72,23 +78,23 @@ function onYouTubeIframeAPIReady() {
 function onPlayerReady(event) {
   console.log("player ready");
   myFirebaseRef.on('child_changed', function (snapshot) {
-      var newPost = snapshot.val();
-      console.log(newPost);
+    var newPost = snapshot.val();
+    console.log(newPost);
+    $('#title').text(newPost.Gesture);
+    if (newPost.UUID === "47826") {
+      $('body').css('background', 'green');
       $('#title').text(newPost.Gesture);
-      if (newPost.UUID === "47826") {
-        $('body').css('background', 'green');
-        $('#title').text(newPost.Gesture);
-        if (player && newPost.Gesture === 'spread') {
-          console.log("in if");
-          player.playVideo();
-        } else if (player && newPost.Gesture === 'fist') {
-          console.log("in else if");
-          player.stopVideo();
-        }
-
-      } else {
-        $('body').css('background', 'red');
-        $('#title').text('');
+      if (player && newPost.Gesture === 'spread') {
+        console.log("in if");
+        player.playVideo();
+      } else if (player && newPost.Gesture === 'fist') {
+        console.log("in else if");
+        player.stopVideo();
       }
-    });
+
+    } else {
+      $('body').css('background', 'red');
+      $('#title').text('');
+    }
+  });
 }
