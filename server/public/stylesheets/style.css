@@ -14,8 +14,8 @@ a {
   width: 100%;
 }
 
-.page.soundcloud {
-  /*padding: 50px;*/
+.page {
+  text-align: center;
 }
 
 .phone {

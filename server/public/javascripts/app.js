@@ -169,8 +169,8 @@ function loadYoutubeVideo() {
 function onYouTubeIframeAPIReady() {
   console.log("api ready");
   player = new YT.Player('yt-player', {
-    height: '100%',
-    width: '100%',
+    height: '80%',
+    width: '80%',
     playerVars: {
       listType:'playlist',
       list: 'PLl4T6p7km9dbQojQLEz4N7nUPf8ER9rwr'
